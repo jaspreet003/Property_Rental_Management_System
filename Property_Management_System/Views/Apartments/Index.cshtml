@@ -1,0 +1,134 @@
+@model IEnumerable<Property_Management_System.Models.ApartmentViewModel>
+
+<h1>Apartments</h1>
+
+@if(User.IsInRole("Owner")||User.IsInRole("Manager")){ 
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ... other head elements ... -->
+    <style>
+        .apartment-card {
+            width: 290px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .apartment-card img {
+            width: 100%;
+            display: block;
+        }
+
+        .apartment-info {
+            padding: 15px;
+            background: #fff;
+        }
+
+        .apartment-info h3 {
+            font-size: 18px;
+            margin: 0 0 10px;
+        }
+
+        .details-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+        .rent-status{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+       }
+
+        .details-row span {
+            display: inline-block;
+            background: #eee;
+            padding: 3px 6px;
+            border-radius: 3px;
+        }
+
+        .price {
+            font-size: 24px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .status {
+            font-size: 14px;
+            font-weight: bold;
+            color: #4caf50; /* Adjust color based on status */
+        }
+
+        .buttons-row {
+            padding: 15px;
+            background: #f9f9f9;
+            text-align: center;
+        }
+
+        .buttons-row a {
+            text-decoration: none;
+            color: #fff;
+            background: #007bff;
+            padding: 8px 16px;
+            border-radius: 4px;
+            margin-right: 5px;
+        }
+
+        .list-container{
+        display:flex;
+        flex-direction:row;
+        flex-wrap:wrap;
+        gap:20px;}
+        </style>
+</head>
+<body>
+    <div class="list-container">
+    @foreach (var apartmentViewModel in Model)
+    {
+        <div class="apartment-card">
+            <div class="apartment-image">
+                <!-- Placeholder for apartment image -->
+                <!-- Ideally, the image source would be part of the model -->
+                <img src="/images/apartment.jpg" alt="Apartment Image">
+            </div>
+            <div class="apartment-info">
+                <!-- Display the building address instead of the BuildingId -->
+                <h3>@apartmentViewModel.BuildingAddress</h3>
+                <div class="details-row">
+                    <span>@apartmentViewModel.NumberOfRooms Beds</span>
+                    <span>@apartmentViewModel.NumberOfBathrooms Baths</span>
+                    <span>Floor No: @apartmentViewModel.Floor</span>
+                </div>
+                <div class="rent-status">
+                <span class="price">$@apartmentViewModel.RentPerMonth</span>
+                <span class="status">@apartmentViewModel.Status</span>
+                </div>
+            </div>
+            <div class="buttons-row">
+                    @if (User.IsInRole("Owner") || User.IsInRole("Manager"))
+                    {
+                        <a asp-controller="Apartments" asp-action="Edit" asp-route-id="@apartmentViewModel.ApartmentId" >Edit</a>
+                        <a asp-action="Delete">Delete</a>
+                    }
+                    else{
+                        <a asp-action="Create" asp-controller="Visits">Visit</a>
+                        <a asp-action="SendMessage" asp-controller="Message">Message</a>
+                    }
+            </div>
+        </div>
+          
+     }
+     </div>
+
+  
+</body>
+</html>

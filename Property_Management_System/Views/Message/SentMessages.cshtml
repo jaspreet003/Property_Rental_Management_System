@@ -1,0 +1,21 @@
+@model IEnumerable<Property_Management_System.Models.Message>
+
+<h2>Sent Messages</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Message</th>
+            <th>To</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var message in Model)
+        {
+            <tr>
+                <td>@message.Content</td>
+                <td>@message.ReceiverName</td>
+            </tr>
+        }
+    </tbody>
+</table>

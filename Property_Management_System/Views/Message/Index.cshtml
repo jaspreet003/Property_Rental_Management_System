@@ -1,0 +1,30 @@
+@model List<Message>
+
+<h1>Messages</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Message ID</th>
+            <th>Content</th>
+            <th>Sender ID</th>
+            <th>Receiver ID</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var message in Model)
+        {
+            <tr>
+                <td>@message.MessageId</td>
+                <td>@message.Content</td>
+                <td>@message.SenderId</td>
+                <td>@message.ReceiverId</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@message.MessageId">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@message.MessageId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

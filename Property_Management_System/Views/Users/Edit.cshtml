@@ -1,0 +1,43 @@
+@using Microsoft.AspNetCore.Identity
+@model ApplicationUser
+
+<h1 class="text-center">Edit User</h1>
+
+<form asp-action="Edit" style="max-width: 380px; margin: 0 auto;">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group mb-2">
+        <label asp-for="UserName" class="mb-1"></label>
+        <input asp-for="UserName" class="form-control" />
+        <span asp-validation-for="UserName"></span>
+    </div>
+
+    <div class="form-group mb-2">
+        <label asp-for="Email" class="mb-1"></label>
+        <input asp-for="Email" class="form-control" />
+        <span asp-validation-for="Email"></span>
+    </div>
+
+    <div class="form-group mb-2">
+        <label asp-for="PhoneNumber" class="mb-1"></label>
+        <input asp-for="PhoneNumber" class="form-control" />
+        <span asp-validation-for="PhoneNumber"></span>
+    </div>
+
+    <div class="form-group mb-2">
+        <label for="Role" class="mb-1">Role</label>
+        <select id="Role" name="Role" class="form-control">
+            <option value="Owner">Owner</option>
+            <option value="Manager">Manager</option>
+            <option value="Tenant">Tenant</option>
+        </select>
+    </div>
+
+    <div class="form-group my-3">
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+</form>
+
+<p>
+    <a asp-action="Index">Back to List</a>
+</p>

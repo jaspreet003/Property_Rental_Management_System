@@ -1,0 +1,32 @@
+@model IEnumerable<Visit>
+@using Property_Management_System.Enums;
+
+<h1>Visits</h1>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Visit ID</th>
+            <th>Date</th>
+            <th>Slot</th>
+            <th>Tenant ID</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var visit in Model)
+        {
+            <tr>
+                <td>@visit.VisitId</td>
+                <td>@visit.VisitDate.ToString("yyyy-MM-dd")</td>
+                <td>@visit.Slot.ToTimeString()</td>
+                <td>@visit.TenantId</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@visit.VisitId">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

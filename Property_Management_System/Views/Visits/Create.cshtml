@@ -1,0 +1,88 @@
+@model Visit
+@using Property_Management_System.Enums;
+@using Property_Management_System.Models;
+@using System.Security.Claims
+@using Microsoft.AspNetCore.Identity;
+@inject UserManager<ApplicationUser> UserManager
+@{
+    var user = await UserManager.GetUserAsync(User);
+    var userId = user?.Id;
+}
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+<div style="max-width: 380px; padding: 20px; margin: auto;">
+    <form asp-action="Create">
+        <div class="form-group">
+            <label asp-for="BuildingId" class="control-label"></label>
+            <select asp-for="BuildingId" class="form-control" asp-items="ViewBag.BuildingId"></select>
+        </div>
+        <div class="form-group">
+            <label asp-for="ApartmentId" class="control-label"></label>
+            <select asp-for="ApartmentId" class="form-control" asp-items="ViewBag.ApartmentId"></select>
+        </div>
+        @if (User.IsInRole("Tenant"))
+        {
+
+            <input asp-for="TenantId" class="form-control" value="@userId" hidden readonly />
+        }
+        else
+        {
+            <div class="form-group">
+                <label asp-for="TenantId" class="control-label"></label>
+                <select asp-for="TenantId" class="form-control" asp-items="ViewBag.TenantId"></select>
+            </div>
+        }
+
+        <div class="form-group">
+            <label asp-for="VisitDate" class="control-label"></label>
+            <input asp-for="VisitDate" class="form-control" />
+            <span asp-validation-for="VisitDate" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Slot" class="control-label"></label>
+            <select asp-for="Slot" class="form-control">
+                @foreach (SlotEnum slot in Enum.GetValues(typeof(SlotEnum)))
+                {
+                    <option value="@slot">@slot.ToTimeString()</option>
+                }
+            </select>
+            <span asp-validation-for="Slot" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <input type="submit" class="btn btn-primary" />
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script>
+        $(function () {
+            $('#BuildingId').change(function () {
+                var selectedBuilding = $(this).val();
+                if (selectedBuilding) {
+                    $.getJSON('/Visits/GetApartments', { buildingId: selectedBuilding }, function (data) {
+                        var items = '<option>Select an apartment</option>';
+                        $.each(data, function (i, apartment) {
+                            items += '<option value="' + apartment.value + '">' + apartment.text + '</option>';
+                        });
+                        $('#ApartmentId').html(items);
+                    }).fail(function (jqXHR, textStatus, error) {
+                        console.log("Request failed: " + textStatus + ", " + error);
+                    });
+                } else {
+                    $('#ApartmentId').html('<option>Select a building first</option>');
+                }
+            });
+        });
+    </script>
+}

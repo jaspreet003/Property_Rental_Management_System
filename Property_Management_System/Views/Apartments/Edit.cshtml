@@ -1,0 +1,50 @@
+@model Property_Management_System.Models.ApartmentViewModel
+
+<h1>Edit</h1>
+
+<form asp-action="Edit">
+    <input type="hidden" asp-for="ApartmentId" />
+    <div class="form-group">
+        <label asp-for="Floor" class="control-label"></label>
+        <input asp-for="Floor" class="form-control" />
+        <span asp-validation-for="Floor" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ApartmentNumber" class="control-label"></label>
+        <input asp-for="ApartmentNumber" class="form-control" />
+        <span asp-validation-for="ApartmentNumber" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="RentPerMonth" class="control-label"></label>
+        <input asp-for="RentPerMonth" class="form-control" />
+        <span asp-validation-for="RentPerMonth" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="NumberOfRooms" class="control-label"></label>
+        <input asp-for="NumberOfRooms" class="form-control" />
+        <span asp-validation-for="NumberOfRooms" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="NumberOfBathrooms" class="control-label"></label>
+        <input asp-for="NumberOfBathrooms" class="form-control" />
+        <span asp-validation-for="NumberOfBathrooms" class="text-danger"></span>
+    </div>
+    <div class="form-group mb-2">
+        <label for="status" class="mb-1">Status</label>
+        <select id="status" name="status" class="form-control">
+            <option value="Rented">Rented</option>
+            <option value="Available">Available</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label asp-for="BuildingId" class="control-label"></label>
+        <input asp-for="BuildingId" class="form-control" readonly />
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

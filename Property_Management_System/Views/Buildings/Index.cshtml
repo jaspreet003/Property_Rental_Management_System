@@ -1,0 +1,35 @@
+@model IEnumerable<Property_Management_System.Models.Building>
+
+<h1>Buildings</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.First().BuildingId)</th>
+            <th>@Html.DisplayNameFor(model => model.First().NbFloor)</th>
+            <th>@Html.DisplayNameFor(model => model.First().NbApartment)</th>
+            <th>@Html.DisplayNameFor(model => model.First().ManagerName)</th>
+            <th>@Html.DisplayNameFor(model => model.First().Address)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.BuildingId)</td>
+                <td>@Html.DisplayFor(modelItem => item.NbFloor)</td>
+                <td>@Html.DisplayFor(modelItem => item.NbApartment)</td>
+                <td>@Html.DisplayFor(modelItem => item.ManagerName)</td>
+                <td>@Html.DisplayFor(modelItem => item.Address)</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.BuildingId">Edit</a> |
+                    <a asp-action="Delete" asp-route-id="@item.BuildingId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

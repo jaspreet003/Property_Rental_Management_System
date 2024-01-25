@@ -1,0 +1,26 @@
+@model IEnumerable<Property_Management_System.Models.Message>
+
+<h2>Received Messages</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Message</th>
+            <th>From</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var message in Model)
+        {
+            <tr>
+                <td>@message.Content</td>
+                <td>@message.SenderName</td>
+                <td>
+                    <a asp-action="SendMessage" asp-controller="Message" asp-route-ReceiverId="@message.SenderId"
+                        class="btn btn-primary">Reply</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

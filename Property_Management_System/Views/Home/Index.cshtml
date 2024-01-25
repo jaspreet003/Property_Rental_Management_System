@@ -1,0 +1,120 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home - Project Management System</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Open Sans', sans-serif;
+            background: url('/images/house.jpg') no-repeat center center;
+            background-size: cover;
+            position: relative;
+        }
+
+        /* Overlay should start below the header */
+        .overlay {
+            position: absolute;
+            top: 60px; /* Assuming your header is 60px tall */
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+            z-index: 1;
+        }
+
+        .content {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translateY(-50%);
+            width: 25%; /* Reduced width */
+            margin-left: 5%; /* Margin from the left of the page */
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 2;
+            text-align: left;
+        }
+
+        
+
+        .btn-container {
+            display: flex; /* Align buttons in a row */
+            justify-content: start;
+        }
+
+        .btn {
+            width: calc(50% - 20px);
+            padding: 10px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: inline-block; /* This makes the buttons sit side by side */
+        }
+
+        .btn-login {
+            background-color: #007bff;
+        }
+
+            .btn-login:hover {
+                background-color: #0056b3;
+            }
+
+        .btn-signup {
+            background-color: #28a745;
+        }
+
+            .btn-signup:hover {
+                background-color: #218838;
+            }
+
+        h1 {
+            color: #333;
+            margin-bottom: 0.5em;
+            font:bold;
+        }
+
+        p {
+            color: #666;
+            font-size: 1em;
+            margin-bottom: 2em;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header goes here -->
+    <div class="overlay"></div> <!-- Overlay starts below the header -->
+    <div class="content">
+        <h1>Welcome to Property Management System</h1>
+        <p>Manage your properties and find your perfect rental apartment with us.</p>
+        <div class="btn-container">
+            <button class="btn btn-login" onclick="location.href='@Url.Action("Login", "Account")'">Login</button>
+            <button class="btn btn-signup" onclick="location.href='@Url.Action("Register", "Account")'">Sign Up</button>
+        </div>
+    </div>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
+
+
+
+
+
